@@ -2,11 +2,13 @@ import React from 'react';
 import '../index.css';
 import buttonAdd from '../images/button_add.svg';
 import { api } from '../utils/Api';
+import Card from './Card';
 
 function Main(props) {
   const [userAvatar, setUserAvatar] = React.useState({});
   const [userName, setUserName] = React.useState({});
   const [userDescription, setUserDescription] = React.useState({});
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api
@@ -21,15 +23,25 @@ function Main(props) {
       });
   }, []);
 
+  React.useEffect(() => {
+    api
+      .getCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <main className="content">
       <section className="profile">
         <div className="profile__disk" onClick={props.onEditAvatar}>
           <img
-            src="#"
+            src={userAvatar.avatar}
             alt="Аватар"
             className="profile__avatar"
-            style={{ backgroundImage: `url(${userAvatar.avatar})` }}
           />
         </div>
         <div className="profile__info">
@@ -50,7 +62,19 @@ function Main(props) {
           <img src={buttonAdd} alt="Добавить" className="profile__add-icon" />
         </button>
       </section>
-      <section className="cards"></section>
+
+      <section className="cards">
+        {cards.map((card) => (
+          <Card
+            key={card['_id']}
+            card={card}
+            link={card.link}
+            name={card.name}
+            likes={card.likes.length}
+            onCardClick={props.onCardClick}
+          />
+        ))}
+      </section>
     </main>
   );
 }

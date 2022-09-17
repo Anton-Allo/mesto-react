@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup.js';
 import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
+import ConfirmPopupDelete from './ConfirmPopupDelete';
 import api from '../utils/Api.js';
 
 function App() {
@@ -16,7 +17,6 @@ function App() {
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
-  const [cards, setCards] = React.useState([]);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -49,6 +49,7 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
       </div>
@@ -62,23 +63,7 @@ function App() {
       />
       <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-
-      <section className="popup popup_confirm-delete">
-        <div className="popup__container">
-          <button aria-label="Закрыть" type="button" className="popup__close" />
-          <h2 className="popup__title popup__title_confirm-delete">
-            Вы уверены?
-          </h2>
-          <button
-            type="submit"
-            className="popup__submit-button popup__submit-button_confirm-delete"
-          >
-            Да
-          </button>
-        </div>
-      </section>
-
-      <template id="cardTemplate" />
+      <ConfirmPopupDelete onClose={closeAllPopups} />
     </div>
   );
 }
