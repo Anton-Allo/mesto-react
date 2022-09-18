@@ -42,7 +42,7 @@ function App() {
   }
 
   return (
-    <div className="body">
+    <>
       <div className="page">
         <Header />
         <Main
@@ -64,7 +64,7 @@ function App() {
       <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       <ConfirmPopupDelete onClose={closeAllPopups} />
-    </div>
+    </>
   );
 }
 
