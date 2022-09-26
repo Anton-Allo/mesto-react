@@ -2,6 +2,9 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function EditProfilePopup(props) {
+  const [name, setName] = React.useState('');
+  const [descriptions, setDescription] = React.useState('');
+
   return (
     <PopupWithForm
       isOpen={props.isOpen}

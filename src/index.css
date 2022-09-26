@@ -22,6 +22,8 @@
 @import url(./blocks/card/__like-button/card__like-button.css);
 @import url(./blocks/card/__like-button/_active/card__like-button_active.css);
 @import url(./blocks/card/__trash-button/card__trash-button.css);
+@import url(./blocks/card/__trash-button/_visible/card__trash-button_visible.css);
+@import url(./blocks/card/__trash-button/_hidden/card__trash-button_hidden.css);
 @import url(./blocks/card/__counter-likes/card__counter-likes.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);
