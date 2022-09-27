@@ -1,9 +1,33 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function EditProfilePopup(props) {
   const [name, setName] = React.useState('');
-  const [descriptions, setDescription] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const currentUser = React.useContext(CurrentUserContext);
+
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
+
+  function handleChangeName(e) {
+    setName(e.target.value);
+  }
+
+  function handleChangeDescription(e) {
+    setDescription(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    // Запрещаем браузеру переходить по адресу формы
+    e.preventDefault();
+    props.onUpdateUser({
+      name,
+      about: description,
+    });
+  }
 
   return (
     <PopupWithForm
@@ -15,6 +39,7 @@ function EditProfilePopup(props) {
       formName={'form-edit_profile-info'}
       submitBtn={'save-form-button'}
       buttonText={'Сохранить'}
+      onSubmit={handleSubmit}
     >
       <input
         type="text"
@@ -25,19 +50,23 @@ function EditProfilePopup(props) {
         maxLength={40}
         required
         id="inputNameProfile"
+        value={name}
+        onChange={handleChangeName}
       />
       <span className="popup__input-error inputNameProfile-error">
         Вы пропустили это поле.
       </span>
       <input
         type="text"
-        placeholder="Род занятий"
+        placeholder="О себе"
         name="about"
         className="popup__input-form popup__input-form-occupation"
         minLength={2}
         maxLength={200}
         required
         id="inputOccupationProfile"
+        value={description}
+        onChange={handleChangeDescription}
       />
       <span className="popup__input-error inputOccupationProfile-error">
         Вы пропустили это поле.

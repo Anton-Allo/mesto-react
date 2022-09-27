@@ -11,17 +11,15 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: this._headers
-    })
-      .then(this._checkRequest);
+      headers: this._headers,
+    }).then(this._checkRequest);
   }
 
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: this._headers
-    })
-      .then(this._checkRequest);
+      headers: this._headers,
+    }).then(this._checkRequest);
   }
 
   editUserInfo(name, about) {
@@ -30,10 +28,9 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name,
-        about
-      })
-    })
-      .then(this._checkRequest);
+        about,
+      }),
+    }).then(this._checkRequest);
   }
 
   addCard(name, link) {
@@ -42,34 +39,30 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name,
-        link
-      })
-    })
-      .then(this._checkRequest);
+        link,
+      }),
+    }).then(this._checkRequest);
   }
 
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers
-    })
-      .then(this._checkRequest);
+      headers: this._headers,
+    }).then(this._checkRequest);
   }
 
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
-      headers: this._headers
-    })
-      .then(this._checkRequest);
+      headers: this._headers,
+    }).then(this._checkRequest);
   }
 
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
-      headers: this._headers
-    })
-      .then(this._checkRequest);
+      headers: this._headers,
+    }).then(this._checkRequest);
   }
 
   editAvatar(avatar) {
@@ -77,10 +70,9 @@ class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar
-      })
-    })
-      .then(this._checkRequest);
+        avatar,
+      }),
+    }).then(this._checkRequest);
   }
 }
 
@@ -88,6 +80,6 @@ export const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-48',
   headers: {
     authorization: '3deadbdc-8b26-4c00-8156-86e3672ec6f8',
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
