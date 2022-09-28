@@ -22,24 +22,24 @@ class Api {
     }).then(this._checkRequest);
   }
 
-  editUserInfo(name, about) {
+  editUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name,
-        about,
+        name: data.name,
+        about: data.about,
       }),
     }).then(this._checkRequest);
   }
 
-  addCard(name, link) {
+  addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name,
-        link,
+        name: data.name,
+        link: data.link,
       }),
     }).then(this._checkRequest);
   }
